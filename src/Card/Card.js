@@ -5,20 +5,22 @@ function Card(props) {
   const { title, author, pages, read } = props.book;
   return (
     <div className="Card">
-      <input
-        type="button"
-        value="Remove"
-        onClick={() => props.destroyBook(props.book)}
-      ></input>
-      <input
-        type="button"
-        value="Toggle Read"
-        onClick={() => props.toggleRead(props.book)}
-      ></input>
-      <span>Title: {title}</span>
-      <span>Author: {author}</span>
-      <span>Pages: {pages}</span>
-      <span>Read: {read ? 'Yes' : 'No'}</span>
+      <div>Title: {title}</div>
+      <div>Author: {author}</div>
+      <div>Pages: {pages}</div>
+      <div>Read: {read ? 'Yes' : 'No'}</div>
+      <div className="Card-buttons">
+        <input
+          type="button"
+          value="Mark Read"
+          onClick={() => props.toggleRead(props.book)}
+        ></input>
+        <input
+          type="button"
+          value="Delete"
+          onClick={() => props.destroyBook(props.book)}
+        ></input>
+      </div>
     </div>
   );
 }

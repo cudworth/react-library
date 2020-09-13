@@ -11,48 +11,48 @@ function InputForm(props) {
     <div className="InputForm">
       <form>
         <div>
-          <label htmlFor="title">Title</label>
           <input
             name="title"
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           ></input>
+          <label htmlFor="title">Title</label>
         </div>
 
         <div>
-          <label htmlFor="author">Author</label>
           <input
             name="author"
             type="text"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
           ></input>
+          <label htmlFor="author">Author</label>
         </div>
 
         <div>
-          <label htmlFor="pages">Pages</label>
           <input
             name="pages"
             type="text"
             value={pages}
             onChange={(e) => setPages(e.target.value)}
           ></input>
+          <label htmlFor="pages">Pages</label>
         </div>
 
         <div>
-          <label htmlFor="read">Read</label>
           <input
             name="read"
             type="checkbox"
             value={read}
             onChange={(e) => setRead(e.target.checked)}
           ></input>
+          <label htmlFor="read">Read</label>
         </div>
 
         <input
           type="submit"
-          value="Submit"
+          value="Add Book"
           onClick={(e) => {
             e.preventDefault();
             props.onSubmit({ title, author, pages, read });

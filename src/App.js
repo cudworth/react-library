@@ -1,54 +1,49 @@
-import React, { useState } from 'react';
-//import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import './reset.css';
 import './App.css';
 import Header from './Header/Header';
 import InputForm from './InputForm/InputForm';
 import Card from './Card/Card';
 
-function App() {
-  const [library, setLibrary] = useState([]);
-  const [isFormVisible, setFormVisibility] = useState(false);
+import _ from 'lodash';
 
-  function toggleFunction(fn, val) {
-    fn((val) => !val);
-  }
+const savedLibrary = JSON.parse(sessionStorage.getItem('library'));
+
+function App() {
+  const [library, setLibrary] = useState(_.cloneDeep(savedLibrary) || []);
+
+  useEffect(() => {
+    sessionStorage.setItem('library', JSON.stringify(library));
+  }, [library]);
 
   function createBook(book) {
-    toggleFunction(setFormVisibility, isFormVisible);
     setLibrary((library) => [...library, book]);
   }
 
-  //TODO
   function destroyBook(book) {
-    console.log(book);
+    const index = library.indexOf(book);
+    setLibrary((prevLibrary) => {
+      const newLibrary = _.cloneDeep(prevLibrary);
+      newLibrary.splice(index, 1);
+      return newLibrary;
+    });
   }
-  //TODO
+
   function toggleRead(book) {
-    console.log(book);
-  }
-
-  let inputForm;
-
-  if (isFormVisible) {
-    inputForm = <InputForm onSubmit={createBook} />;
-  } else {
-    inputForm = (
-      <input
-        type="button"
-        value="Create Book"
-        onClick={() => toggleFunction(setFormVisibility, isFormVisible)}
-      ></input>
-    );
+    const index = library.indexOf(book);
+    setLibrary((prevLibrary) => {
+      const newLibrary = _.cloneDeep(prevLibrary);
+      newLibrary[index].read = !newLibrary[index].read;
+      return newLibrary;
+    });
   }
 
   return (
     <div className="App">
       <Header />
-      <hr />
 
-      {inputForm}
+      <InputForm onSubmit={createBook} />
 
-      <hr />
       {library.map((book, index) => {
         return (
           <Card

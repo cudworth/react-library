@@ -1,5 +1,22 @@
 .Card {
-  background-color: palegreen;
-  margin: 21px;
-  border-radius: 4px;
+  position: relative;
+  top: 10%;
+  left: 30%;
+  width: 70%;
+  z-index: 0;
+  border-bottom: 2px solid #967ecb;
+}
+
+.Card div {
+  padding: 8px;
+}
+
+.Card input {
+  margin: 4px;
+}
+
+.Card-buttons {
+  position: absolute;
+  right: 0;
+  top: 0;
 }
