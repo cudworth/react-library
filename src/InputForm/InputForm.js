@@ -1,63 +1,95 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './InputForm.css';
 
 function InputForm(props) {
+  /*
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [pages, setPages] = useState('');
   const [read, setRead] = useState(false);
+  */
+
+  const { title, author, pages, read } = props.data;
 
   return (
     <div className="InputForm">
       <form>
         <div>
+          <div>
+            <label htmlFor="title">Book Title</label>
+          </div>
           <input
+            className="input-text"
+            placeholder="A River Runs Through It"
             name="title"
             type="text"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => props.handleChange(e)}
           ></input>
-          <label htmlFor="title">Title</label>
         </div>
 
         <div>
+          <div>
+            <label htmlFor="author">Author</label>
+          </div>
           <input
+            className="input-text"
+            placeholder="Norman Maclean"
             name="author"
             type="text"
             value={author}
-            onChange={(e) => setAuthor(e.target.value)}
+            onChange={(e) => props.handleChange(e)}
           ></input>
-          <label htmlFor="author">Author</label>
         </div>
 
         <div>
+          <div>
+            <label htmlFor="pages">Page Count</label>
+          </div>
           <input
+            className="input-text"
+            placeholder="238"
             name="pages"
-            type="text"
+            type="number"
             value={pages}
-            onChange={(e) => setPages(e.target.value)}
+            onChange={(e) => props.handleChange(e)}
           ></input>
-          <label htmlFor="pages">Pages</label>
+        </div>
+
+        <div>
+          <span>
+            <label htmlFor="read">Read</label>
+            <input
+              name="read"
+              type="radio"
+              value="read"
+              checked={read === 'read'}
+              onChange={(e) => props.handleChange(e)}
+            ></input>
+          </span>
+
+          <span>
+            <label htmlFor="read">Unread</label>
+            <input
+              name="read"
+              type="radio"
+              value="unread"
+              checked={read === 'unread'}
+              onChange={(e) => props.handleChange(e)}
+            ></input>
+          </span>
         </div>
 
         <div>
           <input
-            name="read"
-            type="checkbox"
-            value={read}
-            onChange={(e) => setRead(e.target.checked)}
+            type="submit"
+            value="Add Book"
+            onClick={(e) => {
+              e.preventDefault();
+              props.onSubmit();
+            }}
           ></input>
-          <label htmlFor="read">Read</label>
         </div>
-
-        <input
-          type="submit"
-          value="Add Book"
-          onClick={(e) => {
-            e.preventDefault();
-            props.onSubmit({ title, author, pages, read });
-          }}
-        ></input>
       </form>
     </div>
   );

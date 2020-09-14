@@ -5,9 +5,18 @@
   height: 90%;
   width: 30%;
   z-index: 1;
-  border-right: 4px solid #3b1d98;
+  border-right: 2px solid black;
 }
 
 .InputForm div {
   padding: 8px;
+}
+
+.InputForm span {
+  padding: 8px;
+}
+
+.input-text {
+  width: 25ch;
+  height: 1em;
 }

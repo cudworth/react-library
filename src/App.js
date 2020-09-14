@@ -16,8 +16,27 @@ function App() {
     sessionStorage.setItem('library', JSON.stringify(library));
   }, [library]);
 
-  function createBook(book) {
-    setLibrary((library) => [...library, book]);
+  const bookTemplate = {
+    title: '',
+    author: '',
+    pages: '',
+    read: 'unread',
+  };
+
+  const [data, setData] = useState(bookTemplate);
+
+  function handleChange(e) {
+    e.persist(); //Makes persistent event, otherwise synthetic event will be destroyed prior to asynchronous setData method completion
+    setData((prevData) => {
+      const newData = _.cloneDeep(prevData);
+      newData[e.target.name] = e.target.value;
+      return newData;
+    });
+  }
+
+  function createBook() {
+    setLibrary((library) => [...library, data]);
+    setData(bookTemplate);
   }
 
   function destroyBook(book) {
@@ -33,7 +52,8 @@ function App() {
     const index = library.indexOf(book);
     setLibrary((prevLibrary) => {
       const newLibrary = _.cloneDeep(prevLibrary);
-      newLibrary[index].read = !newLibrary[index].read;
+      newLibrary[index].read =
+        newLibrary[index].read === 'unread' ? 'read' : 'unread';
       return newLibrary;
     });
   }
@@ -42,7 +62,11 @@ function App() {
     <div className="App">
       <Header />
 
-      <InputForm onSubmit={createBook} />
+      <InputForm
+        data={data}
+        handleChange={handleChange}
+        onSubmit={createBook}
+      />
 
       {library.map((book, index) => {
         return (

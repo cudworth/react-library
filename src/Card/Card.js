@@ -3,16 +3,18 @@ import './Card.css';
 
 function Card(props) {
   const { title, author, pages, read } = props.book;
+  const readValue = read === 'read' ? 'Mark Unread' : 'Mark Read';
+
   return (
     <div className="Card">
       <div>Title: {title}</div>
       <div>Author: {author}</div>
       <div>Pages: {pages}</div>
-      <div>Read: {read ? 'Yes' : 'No'}</div>
+      <div>{read === 'read' ? 'Read' : 'Unread'}</div>
       <div className="Card-buttons">
         <input
           type="button"
-          value="Mark Read"
+          value={readValue}
           onClick={() => props.toggleRead(props.book)}
         ></input>
         <input
