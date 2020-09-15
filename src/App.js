@@ -7,20 +7,20 @@ import Card from './Card/Card';
 
 import _ from 'lodash';
 
-const savedLibrary = JSON.parse(sessionStorage.getItem('library'));
+const savedLibrary = JSON.parse(localStorage.getItem('library'));
 
 function App() {
   const [library, setLibrary] = useState(_.cloneDeep(savedLibrary) || []);
 
   useEffect(() => {
-    sessionStorage.setItem('library', JSON.stringify(library));
+    localStorage.setItem('library', JSON.stringify(library));
   }, [library]);
 
   const bookTemplate = {
     title: '',
     author: '',
     pages: '',
-    read: 'unread',
+    read: 'read',
   };
 
   const [data, setData] = useState(bookTemplate);
@@ -67,17 +67,18 @@ function App() {
         handleChange={handleChange}
         onSubmit={createBook}
       />
-
-      {library.map((book, index) => {
-        return (
-          <Card
-            key={index}
-            book={book}
-            destroyBook={destroyBook}
-            toggleRead={toggleRead}
-          />
-        );
-      })}
+      <div className="card-cabinet">
+        {library.map((book, index) => {
+          return (
+            <Card
+              key={index}
+              book={book}
+              destroyBook={destroyBook}
+              toggleRead={toggleRead}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }

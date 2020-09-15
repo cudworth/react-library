@@ -82,6 +82,7 @@ function InputForm(props) {
 
         <div>
           <input
+            className="button"
             type="submit"
             value="Add Book"
             onClick={(e) => {

@@ -1,10 +1,9 @@
 .Card {
   position: relative;
-  top: 10%;
-  left: 30%;
-  width: 70%;
+  background-color: white;
   z-index: 0;
-  border-bottom: 2px solid rgb(129, 129, 129);
+  border-radius: 8px;
+  margin-bottom: 20px;
 }
 
 .Card div {

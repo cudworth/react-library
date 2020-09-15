@@ -1,11 +1,12 @@
 .InputForm {
+  text-align: center;
   background-color: white;
-  position: fixed;
-  top: 10%;
-  height: 90%;
-  width: 30%;
+  position: absolute;
+  top: 140px;
+  left: 20px;
+  width: 280px;
   z-index: 1;
-  border-right: 2px solid black;
+  border-radius: 8px;
 }
 
 .InputForm div {
@@ -19,4 +20,5 @@
 .input-text {
   width: 25ch;
   height: 1em;
+  padding: 0.5em;
 }
